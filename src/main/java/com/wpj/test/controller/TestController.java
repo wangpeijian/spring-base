@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-
+/**
+ *
+ * @author wpj
+ */
 @RestController
 public class TestController {
 
@@ -21,7 +23,7 @@ public class TestController {
     public PageInfo test() {
 
         User user = new User();
-        user.setId("123" + new Date().getTime());
+        user.setId("123" + System.currentTimeMillis());
         user.setName("test");
         userMapper.insertSelective(user);
 
@@ -30,6 +32,14 @@ public class TestController {
         PageHelper.startPage(1, 2);
         Page<User> userList = userMapper.getUserList();
         return new PageInfo<>(userList);
+    }
+
+    @GetMapping("test-api")
+    public User testAPI() {
+        User user = new User();
+        user.setId("123" + System.currentTimeMillis());
+        user.setName("test");
+        return user;
     }
 
 }

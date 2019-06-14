@@ -1,0 +1,9 @@
+spring:
+    datasource:
+        username: root
+        password: 123456
+        url: jdbc:mysql://localhost:3306/active_operation_system?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Hongkong
+
+wx:
+    appId: wxc201f9737b033a9d
+    secret: 3ae1719e47d58d8c9701ba8cd975f87d
