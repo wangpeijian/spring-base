@@ -4,6 +4,13 @@ spring:
         password: 123456
         url: jdbc:mysql://localhost:3306/active_operation_system?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Hongkong
 
+    redis:
+        database: 0
+        port: 9091
+        password: 123456
+        cluster:
+            nodes: localhost:9081,localhost:9082,localhost:9083,localhost:9084,localhost:9085,localhost:9086,localhost:9087,localhost:9088
+        timeout: 100ms
 
 logging:
     level:

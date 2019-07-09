@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wpj.test.dao.BuyLogMapper">
+  <resultMap id="BaseResultMap" type="com.wpj.test.dao.entity.BuyLog">
+    <constructor>
+      <arg column="id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="commodity_index" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.wpj.test.dao.entity.BuyLog">
+    insert into buy_log (id, commodity_index, create_time
+      )
+    values (#{id,jdbcType=CHAR}, #{commodityIndex,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wpj.test.dao.entity.BuyLog">
+    insert into buy_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="commodityIndex != null">
+        commodity_index,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="commodityIndex != null">
+        #{commodityIndex,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
