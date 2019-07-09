@@ -32,7 +32,7 @@ public class BuyController {
 
     @Transactional(rollbackFor = {Exception.class})
     @RequestMapping("buy")
-    public String buy() {
+    public String Buy() {
         String key = "commodity_limit";
 
         String script = "if tonumber(redis.call('get', KEYS[1])) > 0 then return redis.call('DECR', KEYS[1]) else return -1 end";
