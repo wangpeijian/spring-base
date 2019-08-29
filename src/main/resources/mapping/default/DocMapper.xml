@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wpj.test.dao.DocMapper">
+    <resultMap id="BaseResultMap" type="com.wpj.test.dao.entity.Doc">
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="type" javaType="java.lang.Byte" jdbcType="TINYINT"/>
+            <arg column="value" javaType="java.lang.Byte" jdbcType="TINYINT"/>
+            <arg column="text" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <insert id="insert" parameterType="com.wpj.test.dao.entity.Doc">
+        insert into doc (id, type, value, text)
+        values (#{id,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{value,jdbcType=TINYINT}, #{text,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.wpj.test.dao.entity.Doc">
+        insert into doc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="value != null">
+                value,
+            </if>
+            <if test="text != null">
+                text,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="value != null">
+                #{value,jdbcType=TINYINT},
+            </if>
+            <if test="text != null">
+                #{text,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
