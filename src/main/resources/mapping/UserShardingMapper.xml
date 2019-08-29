@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wpj.test.dao.UserShardingMapper">
+    <resultMap id="UserJoinMap" type="com.wpj.test.dao.entity.UserSharding">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+
+        <association property="doc" javaType="com.wpj.test.dao.entity.Doc">
+            <id property="id" column="docId"/>
+            <result property="type" column="docType"/>
+            <result property="value" column="docValue"/>
+            <result property="text" column="docText"/>
+        </association>
+
+    </resultMap>
+
+    <select id="getUserJoinList" parameterType="long" resultMap="UserJoinMap">
+        select u.id as id, u.name as name, d.id as docId, d.type as docType, d.value as docValue, d.text as docText
+        from `user` as u
+                 left join `doc` as d on d.id = u.id
+        where u.id <![CDATA[ <= ]]> #{id}
+        order by u.id
+    </select>
+
+</mapper>
