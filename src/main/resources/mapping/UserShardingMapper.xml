@@ -17,7 +17,7 @@
     <select id="getUserJoinList" parameterType="long" resultMap="UserJoinMap">
         select u.id as id, u.name as name, d.id as docId, d.type as docType, d.value as docValue, d.text as docText
         from `user` as u
-                 left join `doc` as d on d.id = u.id
+        left join `doc` as d on d.id = u.id
         where u.id <![CDATA[ <= ]]> #{id}
         order by u.id
     </select>
