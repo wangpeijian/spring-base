@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Collections;
 
@@ -93,16 +94,24 @@ public class TestController {
     @RequestMapping("post")
     public String post() {
         String req = request.getQueryString();
-        System.out.println(req);
 
-        String res = "";
-
-        System.out.println("ContextPath()===========================" + request.getRequestURI());
+        String res = null;
 
         try {
             String body = getBodyString(request);
-            String str = request.getRequestURL() + "?" + req + body;
-            System.out.println(str);
+
+            String str;
+
+            if(req != null){
+                str = request.getRequestURL() + "?" + req + body;
+            }else {
+                str = request.getRequestURL() + body;
+            }
+
+            System.out.println("原始字符串：" + str);
+            str = URLDecoder.decode(str, "UTF-8");
+
+            System.out.println("加密前字符串：" + str);
             String md5 = DigestUtils.md5DigestAsHex(str.getBytes());
             System.out.println(md5);
 
@@ -113,7 +122,7 @@ public class TestController {
             e.printStackTrace();
         }
 
-        return "".equals(res) ? "fail" : "ok";
+        return res == null ? "fail" : "ok";
     }
 
     public static String getBodyString(HttpServletRequest request) throws IOException {
