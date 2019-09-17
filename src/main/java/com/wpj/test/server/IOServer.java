@@ -19,7 +19,7 @@ public class IOServer {
 
     public static void main(String[] args) {
         new Server(8888).start();
-        new Client(8888).start();
+//        new Client(8888).start();
     }
 
     static class Server {
@@ -51,7 +51,9 @@ public class IOServer {
                                 byte[] data = new byte[1024];
                                 InputStream inputStream = socket.getInputStream();
                                 len = inputStream.read(data);
-                                System.out.println("收到客户端内容：" + new String(data, 0, len));
+                                if(len >= 0){
+                                    System.out.println("收到客户端内容：" + new String(data, 0, len));
+                                }
 
                                 socket.shutdownInput();
 
